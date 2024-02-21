@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    .container
+        h2 Create Group
+        form(action="/groups" method="POST")
+            .form-group
+                label(for="name") Group Name:
+                input#name.form-control(type="text" name="name" placeholder="Enter group name" required)
+            .form-group
+                //- todo: add input checking if users exist
+                label(for="members") Members (comma-separated user IDs):
+                input#members.form-control(type="text" name="members" placeholder="Enter member IDs")
+            button.btn.btn-primary(type="submit") Create Group

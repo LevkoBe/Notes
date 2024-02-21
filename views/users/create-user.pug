@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+    .container
+        h2 Create User
+        form(action="/users" method="POST")
+            .form-group
+                label(for="username") Username:
+                input#username.form-control(type="text" name="username" placeholder="Enter username" required)
+            .form-group
+                label(for="email") Email:
+                input#email.form-control(type="email" name="email" placeholder="Enter email" required)
+            .form-group
+                label(for="password") Password:
+                input#password.form-control(type="password" name="password" placeholder="Enter password" required)
+            button.btn.btn-primary(type="submit") Create User

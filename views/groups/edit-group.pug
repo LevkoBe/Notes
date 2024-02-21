@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    .container
+        h2 Edit Group
+        form(action=`/groups/${group.id}?_method=PUT` method="POST")
+            .form-group
+                label(for="name") Group Name:
+                input#name.form-control(type="text" name="name" value=group.name required)
+            .form-group
+                label(for="members") Members (comma-separated user IDs):
+                input#members.form-control(type="text" name="members" value=group.members.join(',') placeholder="Enter member IDs")
+            button.btn.btn-primary(type="submit") Update Group

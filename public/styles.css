@@ -1,0 +1,131 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6ecff;
+}
+
+header {
+    background-color: #4d5e9c;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    margin: 0;
+}
+
+.nav-links {
+    list-style-type: none;
+    margin: 0px 30px -21px 0px;
+    padding: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+.container {
+    margin-top: 100px;
+    padding: 10px;
+}
+
+.col-md-6 {
+    width: 45%;
+    float: left;
+    padding: 20px;
+}
+
+h2 {
+    color: #7383c6;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+    border: 2px solid #7383c6;
+}
+
+a:hover {
+    background-color: #7383c6;
+    color: #fff;
+}
+
+#green-button {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+#red-button {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+footer {
+    background-color: #7383c6;
+    color: #fff;
+    padding: 10px 20px;
+    clear: both;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+    padding: 10px 20px;
+    margin: 20px 0px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7383c6;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: #4d5e9c;
+}

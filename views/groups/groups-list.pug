@@ -1,0 +1,9 @@
+extends ../layout
+
+block content
+    .container
+        h2 Your Groups
+        ul
+            each group in groups
+                li
+                    a(href=`/groups/${group.id}`)= group.name
