@@ -4,17 +4,14 @@ const { Group } = require('../models');
 
 async function getUserDashboard(req, res) {
     try {
-        const userId = req.params.id;
-        const user = await User.findById(userId).populate({
-            path: 'dashboard',
-            populate: {
-                path: 'subfolders notes'
-            }
-        });
-        if (!user) {
-            return res.status(404).render('error', { message: 'User not found', status: 404 });
+        const userId = req.params.id; // todo: add checking for user's identity
+        const folderId = req.params.folderId;
+        console.log(folderId);
+        const folder = await Folder.findOne({ _id: folderId }).populate('subfolders notes');
+        if (!folder) {
+            return res.status(404).render('error', { message: 'Folder not found', status: 404 });
         }
-        res.render('dashboard', { folders: user.dashboard.subfolders, notes: user.dashboard.notes });
+        res.render('dashboard', { folders: folder.subfolders, notes: folder.notes, folder: folder, userId: userId });
     } catch (error) {
         console.error('Error fetching user dashboard:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
@@ -23,17 +20,14 @@ async function getUserDashboard(req, res) {
 
 async function getGroupDashboard(req, res) {
     try {
-        const groupId = req.params.id;
-        const group = await Group.findById(groupId).populate({
-            path: 'dashboard',
-            populate: {
-                path: 'subfolders notes'
-            }
-        });
-        if (!group) {
-            return res.status(404).render('error', { message: 'Group not found', status: 404 });
+        const groupId = req.params.id; // todo: add checking for user's identity
+        const folderId = req.params.folderId;
+        const folder = await Folder.findOne({ _id: folderId }).populate('subfolders notes');
+
+        if (!folder) {
+            return res.status(404).render('error', { message: 'Folder not found', status: 404 });
         }
-        res.render('dashboard', { folders: group.dashboard.subfolders, notes: group.dashboard.notes });
+        res.render('dashboard', { folders: folder.subfolders, notes: folder.notes, folder: folder, groupId: groupId });
     } catch (error) {
         console.error('Error fetching group dashboard:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });

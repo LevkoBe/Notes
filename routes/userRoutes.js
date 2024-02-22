@@ -8,7 +8,7 @@ router.route('/')
 
 router.get('/new', userController.getCreateUserForm);
 
-router.get('/:id/dashboard', dashboardController.getUserDashboard);
+router.get('/:id/:folderId', dashboardController.getUserDashboard);
 
 router.route('/:id')
     .get(userController.getUserInfo)

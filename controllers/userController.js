@@ -16,7 +16,8 @@ async function createUser(req, res) {
     try {
         const rootFolder = await Folder.create({ name: 'root' });
         const user = await User.create({ username, email, password, dashboard: rootFolder._id });
-        res.redirect(`/users/${user.id}`);
+        await Folder.findByIdAndUpdate(rootFolder._id, {owner: user._id});
+        res.redirect(`/users/${user._id}`);
     } catch (error) {
         console.error('Error creating user:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });

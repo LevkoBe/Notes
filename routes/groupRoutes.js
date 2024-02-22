@@ -8,7 +8,7 @@ router.route('/')
     .post(groupController.createGroup);
 
 router.get('/new', groupController.getCreateGroupForm);
-router.get('/:id/dashboard', dashboardController.getGroupDashboard);
+router.get('/:id/folderId', dashboardController.getGroupDashboard);
 
 router.route('/:id')
     .get(groupController.getGroupInfo)

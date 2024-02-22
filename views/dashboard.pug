@@ -2,15 +2,17 @@ extends layout
 
 block content
     .container
-        h2 Dashboard
+        if folder.parentId
+            a(href=`/users/${userId}/${folder.parentId}`) <
+        h2 Folder #{folder.name}
 
         h3 Create Folder
-        form(action="/folders" method="POST")
+        form(action=`/folders/${folder.owner}/${folder._id}` method="POST")
             input(type="text" name="name" placeholder="Folder Name")
             button.btn.btn-success(type="submit") Create
 
         h3 Create Note
-        form(action="/notes" method="POST")
+        form(action=`/notes/${folder.owner}/${folder._id}` method="POST")
             input(type="text" name="title" placeholder="Note Title")
             input(type="text" name="content" placeholder="Note Content")
             button.btn.btn-success(type="submit") Create
@@ -18,9 +20,9 @@ block content
         if folders.length > 0
             h3 Folders
             ul
-                each folder in folders
+                each fold in folders
                     li
-                        a(href=`/folders/${folder._id}`)= folder.name
+                        a(href=`/users/${userId}/${fold._id}`)= fold.name
 
         if notes.length > 0
             h3 Notes
@@ -28,3 +30,5 @@ block content
                 each note in notes
                     li
                         a(href=`/notes/${note._id}`)= note.title
+    p(style="font-size: smaller;") Folder owner: #{folder.owner}
+    p(style="font-size: smaller;") Folder id: #{folder._id}

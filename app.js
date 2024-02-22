@@ -28,6 +28,8 @@ app.use(methodOverrride('_method'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', require('./routes/homeRoutes'));
+app.use('/notes', require('./routes/noteRoutes'));
 app.use('/users', require('./routes/userRoutes'));
+app.use('/folders', require('./routes/folderRoutes'));
 app.use('/groups', require('./routes/groupRoutes'));
 app.use('/*', require('./routes/homeRoutes'));
