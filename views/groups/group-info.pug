@@ -5,6 +5,7 @@ block content
         h2 Group Information
         p Name: #{group.name}
         p Creator: #{group.creator}
+        a.btn.btn-primary(href=`/groups/${group._id}/${group.dashboard}`) View Dashboard
         p Members:
             ul
                 each member in group.members

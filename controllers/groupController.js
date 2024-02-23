@@ -14,7 +14,7 @@ async function createGroup(req, res) {
     const { name, members } = req.body;
     try {
         const rootFolder = await Folder.create({ name: 'root', parentId: null });
-        const group = await Group.create({ name, members, dashboardId: rootFolder._id });
+        const group = await Group.create({ name, members, dashboard: rootFolder._id });
         res.redirect(`/groups/${group.id}`);
     } catch (error) {
         console.error('Error creating group:', error);
