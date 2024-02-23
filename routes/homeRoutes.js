@@ -1,8 +1,10 @@
 const router = require('express').Router();
+const { Group, User } = require('../models');
 
-const { Group } = require('../models');
-const { User } = require('../models');
 
+router.get('/chat', (req, res) => {
+    res.render('chat');
+});
 router.get('/', async (req, res) => {
     try {
         const groups = await Group.find();
