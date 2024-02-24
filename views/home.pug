@@ -12,9 +12,14 @@ block content
                 a.btn.btn-primary(href="/groups/new") Create Group
             
             .col-md-6
-                h2 Your Users
+                h2 Your Notes
                 ul
-                    each user in users
+                    each note in notes
                         li
-                            a(href=`/users/${user.id}`)= user.username
-                a.btn.btn-primary(href="/users/new") Add User
+                            a(href=`/notes/${note._id}`)= note.title
+                            p #{note.content}
+                a.btn.btn-primary(href="/groups/new") Create Group
+
+            .col-md-6
+                h2 Your Profile:
+                a.btn.btn-primary(href=`/users/${user._id}`) #{user.username}

@@ -6,7 +6,6 @@ async function getUserDashboard(req, res) {
     try {
         const userId = req.params.id; // todo: add checking for user's identity
         const folderId = req.params.folderId;
-        console.log(folderId);
         const folder = await Folder.findOne({ _id: folderId }).populate('subfolders notes');
         if (!folder) {
             return res.status(404).render('error', { message: 'Folder not found', status: 404 });

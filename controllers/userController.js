@@ -1,5 +1,4 @@
-const {User} = require('../models/User');
-const {Folder} = require('../models/Folder');
+const {User, Folder} = require('../models');
 
 async function getAllUsers(req, res) {
     try {
@@ -9,23 +8,6 @@ async function getAllUsers(req, res) {
         console.error('Error fetching users:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
     }
-}
-
-async function createUser(req, res) {
-    const { username, email, password } = req.body;
-    try {
-        const rootFolder = await Folder.create({ name: 'root' });
-        const user = await User.create({ username, email, password, dashboard: rootFolder._id });
-        await Folder.findByIdAndUpdate(rootFolder._id, {owner: user._id});
-        res.redirect(`/users/${user._id}`);
-    } catch (error) {
-        console.error('Error creating user:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
-    }
-}
-
-function getCreateUserForm(req, res) {
-    res.render('create-user');
 }
 
 async function getUserInfo(req, res) {
@@ -77,8 +59,6 @@ async function getEditUserForm(req, res) {
 
 module.exports = {
     getAllUsers,
-    createUser,
-    getCreateUserForm,
     getUserInfo,
     updateUser,
     deleteUser,

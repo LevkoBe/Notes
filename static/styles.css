@@ -53,13 +53,20 @@ h2 {
     color: #7383c6;
 }
 
+ul {
+    list-style: none;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
 .message-list-item {
     list-style: none;
     padding: 10px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* slight shadow */
     transition: box-shadow 0.3s;
     margin: 10px;
     width: fit-content;

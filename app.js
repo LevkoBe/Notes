@@ -5,6 +5,7 @@ const socketIo = require('socket.io');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const methodOverrride = require('method-override');
+const verifyToken = require('./handlers/verifyToken');
 
 const app = express();
 const server = http.createServer(app);
@@ -13,7 +14,7 @@ const io = socketIo(server);
 const mongoConnection = "mongodb+srv://lbeniakh:6YdKpcWoP56wFCnW@cluster0.tdh5js4.mongodb.net/?retryWrites=true&w=majority";
 const PORT = 3400;
 
-const start = async() => {
+const start = async () => {
     await mongoose.connect(mongoConnection);
 
     server.listen(PORT, () => {
@@ -27,9 +28,9 @@ app.set('view engine', 'pug');
 app.set('views', ['views', 'views/users', 'views/groups', 'views/notes', 'views/folders']);
 
 app.use(cookieParser());
-app.use(express.static('public'));
+app.use(express.static('static'));
 app.use(methodOverrride('_method'));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -44,6 +45,8 @@ io.on('connection', (socket) => {
     });
 });
 
+app.use('/registration', require('./routes/registrationRoutes.js'));
+app.use(verifyToken);
 app.use('/', require('./routes/homeRoutes'));
 app.use('/notes', require('./routes/noteRoutes'));
 app.use('/users', require('./routes/userRoutes'));

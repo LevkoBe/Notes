@@ -3,8 +3,9 @@ extends ../layout
 block content
     .container
         h2 Create User
-        form(action="/users" method="POST")
+        form(action="/registration/new" method="POST")
             .form-group
+                p(style="color: red; font-size: 16px;") #{message}
                 label(for="username") Username:
                 input#username.form-control(type="text" name="username" placeholder="Enter username" required)
             .form-group

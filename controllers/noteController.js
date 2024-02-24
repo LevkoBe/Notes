@@ -18,6 +18,7 @@ async function createNoteController(req, res) {
         const userId = req.params.userId;
 
         const newNote = new Note({
+            owner: userId,
             title,
             content,
             folderId,
