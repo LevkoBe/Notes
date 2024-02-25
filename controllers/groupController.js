@@ -1,4 +1,4 @@
-const {Group, Folder} = require('../models');
+const {Group, Folder, User} = require('../models');
 
 async function getAllGroups(req, res) {
     try {
@@ -14,7 +14,12 @@ async function createGroup(req, res) {
     const { name, members } = req.body;
     try {
         const rootFolder = await Folder.create({ name: 'root', parentId: null });
-        const group = await Group.create({ name, members, dashboard: rootFolder._id });
+        const group = await Group.create({ 
+            name, 
+            creator: req.userId.userId,
+            members, 
+            dashboard: rootFolder._id 
+        });
         res.redirect(`/groups/${group.id}`);
     } catch (error) {
         console.error('Error creating group:', error);
@@ -22,8 +27,16 @@ async function createGroup(req, res) {
     }
 }
 
-function getCreateGroupForm(req, res) {
-    res.render('create-group');
+async function getCreateGroupForm(req, res) {
+    try {
+        const userId = req.userId.userId;
+        const user = await User.findById(userId);
+        const friends = await User.find({ _id: { $in: user.friends } });
+        res.render('create-group', {friends: friends});
+    } catch (error) {
+        console.error('Error rendering create-group form:', error);
+        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+    }
 }
 
 async function getGroupInfo(req, res) {
@@ -31,7 +44,11 @@ async function getGroupInfo(req, res) {
     try {
         const group = await Group.findById(groupId);
         if (!group) throw new Error('Group not found');
-        res.render('group-info', { group });
+
+        const creator = await User.findById(group.creator);
+        const members = await User.find({ _id: { $in: group.members } });
+
+        res.render('group-info', { group, members, creator });
     } catch (error) {
         console.error('Error fetching group:', error);
         res.status(404).render('error', { message: 'Group not found', status: 404 });
@@ -76,10 +93,15 @@ async function deleteGroup(req, res) {
 
 async function getEditGroupForm(req, res) {
     const groupId = req.params.id;
+    const userId = req.userId.userId;
     try {
         const group = await Group.findById(groupId);
         if (!group) throw new Error('Group not found');
-        res.render('edit-group', { group });
+
+        const currentUser = await User.findById(userId);
+        const friends = await User.find({ _id: { $in: currentUser.friends } });
+
+        res.render('edit-group', { group, friends });
     } catch (error) {
         console.error('Error fetching group for edit:', error);
         res.status(404).render('error', { message: 'Group not found', status: 404 });

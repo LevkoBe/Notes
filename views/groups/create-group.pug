@@ -8,7 +8,9 @@ block content
                 label(for="name") Group Name:
                 input#name.form-control(type="text" name="name" placeholder="Enter group name" required)
             .form-group
-                //- todo: add input checking if users exist
-                label(for="members") Members (comma-separated user IDs):
-                input#members.form-control(type="text" name="members" placeholder="Enter member IDs")
+                label Members:
+                each friend in friends
+                    .form-check
+                        input.form-check-input(type="checkbox" id=`friend_${friend._id}` name="members" value=friend._id)
+                        label.form-check-label(for=`friend_${friend._id}`)= friend.username
             button.btn.btn-primary(type="submit") Create Group

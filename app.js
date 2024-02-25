@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
     });
 });
 
-app.use('/registration', require('./routes/registrationRoutes.js'));
+app.use('/registration', require('./routes/registrationRoutes'));
 app.use(verifyToken);
 app.use('/', require('./routes/homeRoutes'));
 app.use('/notes', require('./routes/noteRoutes'));

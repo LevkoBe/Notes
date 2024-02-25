@@ -57,10 +57,41 @@ async function getEditUserForm(req, res) {
     }
 }
 
+async function addFriend(req, res) {
+    try {
+        const userId = req.userId.userId;
+        const user = await User.findById(userId);
+        const friendId = req.body.friendId;
+
+        const friendExists = await User.exists({ _id: friendId });
+        if (!friendExists) {
+            return res.status(404).render('error', { message: 'Friend not found', status: 404 });
+        }
+
+        if (userId === friendId) {
+            return res.status(400).render('error', { message: "Why do you think that you're a friend of yourself?", status: 400 });
+        }
+
+        if (user.friends.includes(friendId)) {
+            return res.status(400).render('error', { message: 'Friend already added', status: 400 });
+        }
+
+        await User.findByIdAndUpdate(userId, { $push: { friends: friendId } }, { new: true });
+        await User.findByIdAndUpdate(friendId, { $push: { friends: userId } }, { new: true });
+
+        res.status(200).redirect('/');
+    } catch (error) {
+        console.error('Error adding friend:', error);
+        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+    }
+}
+
+
 module.exports = {
     getAllUsers,
     getUserInfo,
     updateUser,
     deleteUser,
-    getEditUserForm
+    getEditUserForm,
+    addFriend
 };

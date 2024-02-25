@@ -4,12 +4,15 @@ block content
     .container
         h2 Group Information
         p Name: #{group.name}
-        p Creator: #{group.creator}
+        p Created by: 
+            a.btn.btn-primary(href=`/users/${creator._id}`) #{creator.username}
+        br
         a.btn.btn-primary(href=`/groups/${group._id}/${group.dashboard}`) View Dashboard
         p Members:
             ul
-                each member in group.members
-                    li= member
-        a.btn.btn-primary(href=`/groups/${group.id}/edit`) Edit Group
-        form(action=`/groups/${group.id}?_method=DELETE` method="POST")
+                each member in members
+                    li
+                        a.btn.btn-primary(href=`/users/${member._id}`) #{member.username}
+        a.btn.btn-primary(href=`/groups/${group._id}/edit`) Edit Group
+        form(action=`/groups/${group._id}?_method=DELETE` method="POST")
             button.btn.btn-danger(type="submit" id="red-button") Delete Group

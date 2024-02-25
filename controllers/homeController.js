@@ -8,10 +8,11 @@ async function renderHomePage(req, res) {
     try {
         const userId = req.userId.userId;
         const groups = await Group.find();
-        const notes = await Note.find({owner: userId});
+        const notes = await Note.find({ owner: userId });
         const user = await User.findById(userId);
-
-        res.render('home', { groups, notes, user });
+        const friends = await User.find({ _id: { $in: user.friends } });
+        
+        res.render('home', { groups, notes, user, friends });
     } catch (error) {
         console.error('Error fetching groups and users:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
