@@ -108,6 +108,13 @@ async function getEditGroupForm(req, res) {
     }
 }
 
+async function getChat(req, res) {
+    const groupId = req.params.id;
+    const group = await Group.findById(groupId);
+    res.render('chat', { group: group });
+}
+
+
 module.exports = {
     getAllGroups,
     createGroup,
@@ -116,5 +123,6 @@ module.exports = {
     updateGroup,
     partialUpdateGroup,
     deleteGroup,
-    getEditGroupForm
+    getEditGroupForm,
+    getChat
 };

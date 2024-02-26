@@ -35,9 +35,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    socket.on('chat message', (msg) => {
-        console.log('Message:', msg);
-        io.emit('chat message', msg);
+    socket.on('joinGroup', (groupId) => {
+        socket.join(groupId);
+    });
+
+    socket.on('chat message', (data) => {
+        const { groupId, message } = data;
+        console.log('Message:', message);
+        io.to(groupId).emit('chat message', message);
     });
 
     socket.on('disconnect', () => {

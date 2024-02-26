@@ -10,6 +10,7 @@ router.route('/')
     
 router.get('/new', groupController.getCreateGroupForm);
 router.get('/:id/edit', groupController.getEditGroupForm);
+router.get('/:id/chat', groupController.getChat);
 router.get('/:id/:folderId', dashboardController.getGroupDashboard);
 
 router.route('/:id')

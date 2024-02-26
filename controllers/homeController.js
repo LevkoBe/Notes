@@ -1,9 +1,5 @@
 const { Group, Note, User } = require('../models');
 
-function chatController(req, res){
-    res.render('chat');
-}
-
 async function renderHomePage(req, res) {
     try {
         const userId = req.userId.userId;
@@ -26,6 +22,5 @@ function logoutController(req, res) {
 
 module.exports = {
     renderHomePage,
-    chatController,
     logoutController
 };
