@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { Folder, User } = require('../models');
 const setTokenCookie = require('../handlers/userCookie');
 const secretKey = 'very-secret-key';
+const saltRounds = 10;
 
 async function createUser(req, res) {
     const { username, email, password } = req.body;
@@ -11,9 +13,11 @@ async function createUser(req, res) {
             return res.render('create-user', { message: 'Username already exists' });
         }
 
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        
         const rootFolder = await Folder.create({ name: 'root' });
-        const user = await User.create({ username, email, password, dashboard: rootFolder._id });
-        await Folder.findByIdAndUpdate(rootFolder._id, {owner: user._id});
+        const user = await User.create({ username, email, password: hashedPassword, dashboard: rootFolder._id });
+        await Folder.findByIdAndUpdate(rootFolder._id, { owner: user._id });
 
         const userId = user._id;
         const token = jwt.sign({ userId }, secretKey, { expiresIn: '1h' });
@@ -38,11 +42,17 @@ async function loginController(req, res) {
         if (!username || !password) {
             return res.render('login', { error: 'Provide username and password, please' });
         }
-        const user = await User.findOne({ username, password });
+        const user = await User.findOne({ username });
 
         if (!user) {
             return res.render('login', { error: 'Invalid username or password' });
         }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            return res.render('login', { error: 'Invalid username or password' });
+        }
+
         const userId = user._id;
         const token = jwt.sign({ userId }, secretKey, { expiresIn: '1h' });
         setTokenCookie(res, token);
@@ -53,7 +63,6 @@ async function loginController(req, res) {
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
     }
 }
-
 
 module.exports = {
     createUser,

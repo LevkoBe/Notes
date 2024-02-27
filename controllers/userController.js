@@ -1,4 +1,6 @@
 const {User, Note} = require('../models');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 async function getAllUsers(req, res) {
     try {
@@ -27,13 +29,21 @@ async function updateUser(req, res) {
     const userId = req.params.id;
     const { username, email, password } = req.body;
     try {
-        await User.findByIdAndUpdate(userId, { username, email, password });
+        let updateFields = { username, email };
+        
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            updateFields.password = hashedPassword;
+        }
+        
+        await User.findByIdAndUpdate(userId, updateFields);
         res.redirect(`/users/${userId}`);
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
     }
 }
+
 
 async function deleteUser(req, res) {
     const userId = req.params.id;
