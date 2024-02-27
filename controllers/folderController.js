@@ -1,4 +1,16 @@
-const { Folder } = require('../models');
+const { Folder, User } = require('../models');
+
+async function getAllFolders(req, res) {
+    try {
+        const userId = req.userId.userId;
+        const user = await User.findById(userId);
+        const folders = await Folder.find({owner: userId});
+        res.render('folders-list', { folders, user });
+    } catch (error) {
+        console.error('Error fetching folders:', error);
+        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+    }
+}
 
 async function createFolderController(req, res) {
     try {
@@ -23,5 +35,6 @@ async function createFolderController(req, res) {
 }
 
 module.exports = {
-    createFolderController
+    createFolderController,
+    getAllFolders
 };

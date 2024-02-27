@@ -1,5 +1,17 @@
-const { Note, Folder } = require('../models');
+const { Note, Folder, User } = require('../models');
 const axios = require('axios');
+
+async function allUserNotes(req, res) {
+    try {
+        const userId = req.userId.userId;
+        const user = await User.findById(userId);
+        const notes = await Note.find({owner: userId});
+        res.render('notes-list', { notes, user });
+    } catch (error) {
+        console.error('Error fetching notes:', error);
+        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+    }
+}
 
 async function oneNoteController(req, res) {
     try {
@@ -63,5 +75,6 @@ async function randomNote(req, res) {
 module.exports = {
     oneNoteController,
     createNoteController,
-    randomNote
+    randomNote,
+    allUserNotes
 };

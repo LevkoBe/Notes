@@ -44,7 +44,7 @@ h1 {
 }
 
 .col-md-6 {
-    width: 45%;
+    width: 30%;
     float: left;
     padding: 20px;
     margin-bottom: 60px;
@@ -97,9 +97,14 @@ a:hover {
     border-color: #4cae4c;
 }
 
-#red-button {
-    background-color: #d9534f;
-    border-color: #d43f3a;
+#pink-button {
+    background-color: #d0bddb;
+    border-color: #7e6a89;
+}
+
+#orange-button {
+    background-color: #d9884f;
+    border-color: #d9744f;
 }
 
 footer {
