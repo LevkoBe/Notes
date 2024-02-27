@@ -1,4 +1,5 @@
 const { Note, Folder } = require('../models');
+const axios = require('axios');
 
 async function oneNoteController(req, res) {
     try {
@@ -41,7 +42,26 @@ async function createNoteController(req, res) {
     }
 }
 
+async function randomNote(req, res) {
+    try {
+        const userId = req.userId.userId;
+        const notes = await Note.find({owner: userId});
+        const noteTitles = notes.map(note => note.title);
+        
+        const djangoResponse = await axios.post('http://127.0.0.1:8000/random-note', {
+            "note_titles": noteTitles
+        });
+        
+        const randomNote = djangoResponse.data;
+        return res.status(200).send(randomNote);
+    } catch (err) {
+        return res.status(500).send(err);
+    }
+}
+
+
 module.exports = {
     oneNoteController,
-    createNoteController
+    createNoteController,
+    randomNote
 };

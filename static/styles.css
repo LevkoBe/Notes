@@ -47,6 +47,7 @@ h1 {
     width: 45%;
     float: left;
     padding: 20px;
+    margin-bottom: 60px;
 }
 
 h2 {
@@ -59,10 +60,6 @@ ul {
 
 li {
     margin-bottom: 20px;
-}
-
-form {
-    margin: 0 0 60px 0;
 }
 
 .message-list-item {

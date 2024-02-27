@@ -1,4 +1,4 @@
-const {User, Folder} = require('../models');
+const {User, Note} = require('../models');
 
 async function getAllUsers(req, res) {
     try {
@@ -14,8 +14,9 @@ async function getUserInfo(req, res) {
     const userId = req.params.id;
     try {
         const user = await User.findById(userId);
+        const notes = await Note.find({owner: userId});
         if (!user) throw new Error('User not found');
-        res.render('user-info', { user });
+        res.render('user-info', { user, notes });
     } catch (error) {
         console.error('Error fetching user:', error);
         res.status(404).render('error', { message: 'User not found', status: 404 });
