@@ -7,19 +7,19 @@ block content
                 h2 Note Information
 
                 .note-section
-                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Title:
-                    span#titleText(style="font-family: 'Verdana', sans-serif;") #{note.title}
+                    label(style="font-weight: lighter;") Title:
+                    p #{note.title}
                 
                 .note-section
-                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Content:
-                    p#contentText(style="font-family: 'Verdana', sans-serif;") #{note.content}
+                    label(style="font-weight: lighter;") Content:
+                    p #{note.content}
                 
                 .note-section
-                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Importance:
-                    span#importanceText(style="font-family: 'Verdana', sans-serif;") #{note.importance}
+                    label(style="font-weight: lighter;") Importance:
+                    p #{note.importance}
                 
                 .note-section
-                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Completed:
+                    label(style="font-weight: lighter;") Completed:
                     input#completedCheckbox(type="checkbox" checked=note.completed, disabled)
 
             .col-md-6
@@ -29,19 +29,19 @@ block content
 
                 form#editNoteForm(action=`/notes/${note._id}?_method=PUT`, method="POST" style="display: none;")
                     .note-section
-                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Title:
+                        label(style="font-weight: lighter;") Title:
                         input(type="text" name="title" value=note.title)
 
                     .note-section
-                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Content:
-                        textarea(name="content" style="font-family: 'Verdana', sans-serif;") #{note.content}
+                        label(style="font-weight: lighter;") Content:
+                        textarea(name="content") #{note.content}
 
                     .note-section
-                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Importance:
+                        label(style="font-weight: lighter;") Importance:
                         input(type="number" name="importance" value=note.importance)
 
                     .note-section
-                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Completed:
+                        label(style="font-weight: lighter;") Completed:
                         input#completedCheckbox(type="checkbox" name="completed" checked=note.completed)
 
                     button.btn.btn-primary(id="updateBtn" type="submit") Update

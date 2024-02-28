@@ -1,8 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 80px 0 0 0;
     padding: 0 0 60px;
     background-color: #f0f8ff;
+    font-family: 'Courier New', monospace;
+    font-weight: bolder;
 }
 
 header {
@@ -106,8 +107,8 @@ a:hover {
 }
 
 #pink-button {
-    background-color: #c28dae;
-    border-color: #9b7e8d;
+    background-color: #d6c0cd;
+    border-color: #532020;
 }
 
 #orange-button {
@@ -124,7 +125,6 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    font-family: 'Arial Black', sans-serif;
 }
 
 input[type="text"],
