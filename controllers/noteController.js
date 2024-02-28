@@ -5,7 +5,7 @@ async function allUserNotes(req, res) {
     try {
         const userId = req.userId.userId;
         const user = await User.findById(userId);
-        const notes = await Note.find({owner: userId});
+        const notes = await Note.find({ owner: userId });
         res.render('notes-list', { notes, user });
     } catch (error) {
         console.error('Error fetching notes:', error);
@@ -19,7 +19,7 @@ async function oneNoteController(req, res) {
         const note = await Note.findById(noteId);
         res.render('note', { note });
     } catch (error) {
-        console.error('Error creating Note:', error);
+        console.error('Error fetching Note:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
     }
 }
@@ -46,7 +46,6 @@ async function createNoteController(req, res) {
             { _id: folderId },
             { $push: { notes: savedNote._id } }
         );
-        // res.status(201).json(savedNote);
         res.status(201).redirect(`/users/${userId}/${folderId}`);
     } catch (error) {
         console.error('Error creating Note:', error);
@@ -54,10 +53,30 @@ async function createNoteController(req, res) {
     }
 }
 
+async function updateNote(req, res) {
+    try {
+        const noteId = req.params.id;
+        const { title, content, importance } = req.body;
+        const completed = req.body.completed === 'on';
+
+        await Note.findByIdAndUpdate(noteId, {
+            title,
+            content,
+            importance,
+            completed
+        }, { new: true });
+
+        res.status(200).redirect(`/notes/${noteId}`);
+    } catch (error) {
+        console.error('Error updating Note:', error);
+        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+    }
+}
+
 async function randomNote(req, res) {
     try {
         const userId = req.userId.userId;
-        const notes = await Note.find({owner: userId});
+        const notes = await Note.find({ owner: userId });
         const noteTitles = notes.map(note => note.title);
         
         const djangoResponse = await axios.post('http://127.0.0.1:8000/random-note', {
@@ -66,8 +85,8 @@ async function randomNote(req, res) {
         
         const randomNote = djangoResponse.data;
         return res.status(200).send(randomNote);
-    } catch (err) {
-        return res.status(500).send(err);
+    } catch (error) {
+        return res.status(500).send(error);
     }
 }
 
@@ -75,6 +94,7 @@ async function randomNote(req, res) {
 module.exports = {
     oneNoteController,
     createNoteController,
+    updateNote,
     randomNote,
     allUserNotes
 };

@@ -129,6 +129,7 @@ textarea {
     font-size: 16px;
     margin: 5px;
     box-sizing: border-box;
+    width: -webkit-fill-available;
 }
 
 button,

@@ -1,85 +1,58 @@
 extends ../layout
 
-//- todo: add patching functionality
-
 block content
     .container
-        h2 Note Information
+        .row
+            .col-md-6
+                h2 Note Information
 
-        // Title section
-        .note-section
-            label Title:
-            if editableTitle
-                input(type="text" name="title" value=note.title)
-            else
-                span#titleText #{note.title}
-                span.edit-icon(class=editableTitle ? 'hidden' : '', onclick="toggleEditable('title')") &#9998;
+                .note-section
+                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Title:
+                    span#titleText(style="font-family: 'Verdana', sans-serif;") #{note.title}
+                
+                .note-section
+                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Content:
+                    p#contentText(style="font-family: 'Verdana', sans-serif;") #{note.content}
+                
+                .note-section
+                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Importance:
+                    span#importanceText(style="font-family: 'Verdana', sans-serif;") #{note.importance}
+                
+                .note-section
+                    label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Completed:
+                    input#completedCheckbox(type="checkbox" checked=note.completed, disabled)
 
-        // Content section
-        .note-section
-            label Content:
-            if editableContent
-                textarea(name="content") #{note.content}
-            else
-                p#contentText #{note.content}
-                span.edit-icon(class=editableContent ? 'hidden' : '', onclick="toggleEditable('content')") &#9998;
+            .col-md-6
+                h2 Edit Note
 
-        // Importance section
-        .note-section
-            label Importance:
-            span.importance-buttons
-                button.btn.btn-sm.btn-danger(type="button" onclick="changeImportance(-1)") -
-                span#importanceText #{note.importance}
-                button.btn.btn-sm.btn-success(type="button" onclick="changeImportance(1)") +
+                button.btn.btn-primary(id="toggleFormBtn") Show Form
 
-        // Completed section
-        .note-section
-            label Completed:
-            input#completedCheckbox(type="checkbox" checked=note.completed, onchange="toggleCompleted()")
+                form#editNoteForm(action=`/notes/${note._id}?_method=PUT`, method="POST" style="display: none;")
+                    .note-section
+                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Title:
+                        input(type="text" name="title" value=note.title)
 
-        // Update button
-        button.btn.btn-primary(id="updateBtn" onclick="updateNote()") Update
+                    .note-section
+                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Content:
+                        textarea(name="content" style="font-family: 'Verdana', sans-serif;") #{note.content}
 
-        // Comment button
-        button.btn.btn-secondary(id="commentBtn" onclick="showCommentForm()") Comment
+                    .note-section
+                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Importance:
+                        input(type="number" name="importance" value=note.importance)
 
-        // Comment form (initially hidden)
-        form#commentForm(action=`/notes/${note._id}/comment`, method="POST" style="display: none;")
-            textarea(name="comment" placeholder="Add a comment...")
-            button.btn.btn-success(type="submit") Submit
+                    .note-section
+                        label(style="font-family: 'Arial', sans-serif; font-weight: bold;") Completed:
+                        input#completedCheckbox(type="checkbox" name="completed" checked=note.completed)
+
+                    button.btn.btn-primary(id="updateBtn" type="submit") Update
 
     script.
-        var editableTitle = false;
-        var editableContent = false;
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleFormBtn = document.getElementById('toggleFormBtn');
+            const editNoteForm = document.getElementById('editNoteForm');
 
-        function toggleEditable(section) {
-            if (section === 'title') {
-                editableTitle = !editableTitle;
-                document.getElementById('titleText').classList.toggle('hidden');
-                document.querySelector('input[name="title"]').classList.toggle('hidden');
-            } else if (section === 'content') {
-                editableContent = !editableContent;
-                document.getElementById('contentText').classList.toggle('hidden');
-                document.querySelector('textarea[name="content"]').classList.toggle('hidden');
-            }
-        }
-
-        function changeImportance(change) {
-            var importance = parseInt(document.getElementById('importanceText').innerText);
-            importance += change;
-            document.getElementById('importanceText').innerText = importance;
-        }
-
-        function toggleCompleted() {
-            var checkbox = document.getElementById('completedCheckbox');
-            checkbox.checked = !checkbox.checked;
-        }
-
-        function updateNote() {
-            // Implement updating the note via AJAX or form submission
-        }
-
-        function showCommentForm() {
-            var commentForm = document.getElementById('commentForm');
-            commentForm.style.display = 'block';
-        }
+            toggleFormBtn.addEventListener('click', function() {
+                editNoteForm.style.display = editNoteForm.style.display === 'none' ? 'block' : 'none';
+                toggleFormBtn.textContent = editNoteForm.style.display === 'none' ? 'Show Form' : 'Close Form';
+            });
+        });
