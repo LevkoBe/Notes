@@ -1,3 +1,4 @@
+const cors = require('cors');
 const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -6,6 +7,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const methodOverrride = require('method-override');
 const verifyToken = require('./handlers/verifyToken');
+
+const prohibitedOrigins = ['http://blocked.com', 'http://anotherblocked.com'];
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +34,15 @@ app.use(cookieParser());
 app.use(express.static('static'));
 app.use(methodOverrride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!prohibitedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 
 io.on('connection', (socket) => {
     console.log('A user connected');

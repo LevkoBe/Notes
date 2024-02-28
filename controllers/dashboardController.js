@@ -19,7 +19,7 @@ async function getUserDashboard(req, res) {
 
 async function getGroupDashboard(req, res) {
     try {
-        const groupId = req.params.id; // todo: add checking for user's identity
+        const groupId = req.params.id;
         const folderId = req.params.folderId;
         const folder = await Folder.findOne({ _id: folderId }).populate('subfolders notes');
 
