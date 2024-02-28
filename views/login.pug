@@ -1,13 +1,18 @@
 extends layout
 
 block content
-    h1 Login
-    if error
-        p.error= error
-    form(action='/registration/login' method='POST')
-        label(for='username') Username:
-        input#username(type='text' name='username' required)
-        label(for='password') Password:
-        input#password(type='password' name='password' required)
-        button(type='submit') Login
-    a(href='/registration/new') Create New User
+    .row
+        .col-md-6
+
+        .col-md-6
+            br
+            h1 Login
+            if error
+                p.error= error
+            form(action='/registration/login' method='POST')
+                label(for='username') Username:
+                input#username(type='text' name='username' required)
+                label(for='password') Password:
+                input#password(type='password' name='password' required)
+                button(type='submit') Login
+            a(href='/registration/new') Create New User

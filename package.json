@@ -1,0 +1,17 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start-redis": "redis-server",
+    "start-django": "cd C:\\webProjects\\ClassWorks\\NotesMicroservice\\note_microservice && python3 manage.py runserver",
+    "start-apps": "concurrently \"npm start\" \"npm run start-django\"",
+    "start-two": "concurrently \"npm start\" \"npm run start-django\"",
+    "kill-ports": "kill -9 $(lsof -t -i:3400,8000,6379) || true"
+},
+  "author": "",
+  "license": "ISC"
+}

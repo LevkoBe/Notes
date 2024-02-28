@@ -1,12 +1,12 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 80px 0 0 0;
     padding: 0 0 60px;
-    background-color: #e6ecff;
+    background-color: #f0f8ff;
 }
 
 header {
-    background-color: #4d5e9c;
+    background-color: #be8d0f;
     color: #fff;
     padding: 20px;
     position: fixed;
@@ -25,6 +25,11 @@ nav {
 
 h1 {
     margin: 0 10px;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+form, p {
+    margin: 10px;
 }
 
 .nav-links {
@@ -51,7 +56,8 @@ h1 {
 }
 
 h2 {
-    color: #7383c6;
+    color: #556b2f;
+    font-family: 'Courier New', monospace;
 }
 
 ul {
@@ -65,7 +71,8 @@ li {
 .message-list-item {
     list-style: none;
     padding: 10px;
-    background-color: #fff;
+    background-color: #f5deb3;
+    /* Wheat */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
@@ -81,34 +88,35 @@ a {
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 5px;
-    background-color: #f0f0f0;
+    background-color: #ffe72f;
     color: #333;
     transition: background-color 0.3s, color 0.3s;
-    border: 2px solid #7383c6;
+    border: 2px solid #556b2f;
+    margin-left: 10px;
 }
 
 a:hover {
-    background-color: #7383c6;
+    background-color: #556b2f;
     color: #fff;
 }
 
 #green-button {
-    background-color: #5cb85c;
-    border-color: #4cae4c;
+    background-color: #32cd32;
+    border-color: #228b22;
 }
 
 #pink-button {
-    background-color: #d0bddb;
-    border-color: #7e6a89;
+    background-color: #c28dae;
+    border-color: #9b7e8d;
 }
 
 #orange-button {
-    background-color: #d9884f;
-    border-color: #d9744f;
+    background-color: #ffa500;
+    border-color: #ff8c00;
 }
 
 footer {
-    background-color: #7383c6;
+    background-color: #556b2f;
     color: #fff;
     padding: 10px 20px;
     clear: both;
@@ -116,6 +124,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    font-family: 'Arial Black', sans-serif;
 }
 
 input[type="text"],
@@ -139,7 +148,7 @@ input[type="reset"] {
     margin: 20px 0px;
     border: none;
     border-radius: 5px;
-    background-color: #7383c6;
+    background-color: #556b2f;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -149,5 +158,5 @@ input[type="reset"] {
 button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover {
-    background-color: #4d5e9c;
+    background-color: #daa520;
 }
