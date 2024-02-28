@@ -50,10 +50,29 @@ form, p {
 }
 
 .col-md-6 {
-    width: 30%;
-    float: left;
     padding: 20px;
     margin-bottom: 60px;
+}
+
+@media screen and (min-width: 1000px) {
+    .col-md-6 {
+        width: 30%;
+        float: left;
+    }
+}
+
+@media screen and (max-width: 999px) and (min-width: 500px) {
+    .col-md-6 {
+        width: 50%;
+        float: left;
+    }
+}
+
+@media screen and (max-width: 499px) {
+    .col-md-6 {
+        width: 90%;
+        float: left;
+    }
 }
 
 h2 {
@@ -73,7 +92,6 @@ li {
     list-style: none;
     padding: 10px;
     background-color: #f5deb3;
-    /* Wheat */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
