@@ -534,7 +534,6 @@
   2. **Install Dependencies**:
       
       ```bash
-      cd leonotes
       npm install
       ```
       
