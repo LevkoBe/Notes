@@ -49,7 +49,7 @@ async function deleteUser(req, res) {
     const userId = req.params.id;
     try {
         await User.findByIdAndDelete(userId);
-        res.redirect('/');
+        res.redirect('/logout');
     } catch (error) {
         console.error('Error deleting user:', error);
         res.status(500).render('error', { message: 'Internal Server Error', status: 500 });

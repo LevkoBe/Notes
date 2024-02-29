@@ -1,6 +1,4 @@
 const { Folder } = require('../models');
-const { User } = require('../models');
-const { Group } = require('../models');
 
 async function getUserDashboard(req, res) {
     try {
