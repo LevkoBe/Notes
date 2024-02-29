@@ -517,7 +517,7 @@
   
 
 # Set-up
-  
+  ### Important! For better installation experience, use my repository "Notes-2.0"
   ###### Prerequisites
   
   - Node.js installed on your system ([Download Node.js](https://nodejs.org/))
@@ -528,7 +528,7 @@
   1. **Clone the Repository**:
       
       ```bash
-      git clone https://github.com/LevkoBe/Notes.git
+      git clone https://github.com/LevkoBe/Notes-2.0.git
       ```
       
   2. **Install Dependencies**:
