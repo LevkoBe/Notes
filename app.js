@@ -28,11 +28,11 @@ const start = async () => {
 start();
 
 app.set('view engine', 'pug');
-app.set('views', ['views', 'views/users', 'views/groups', 'views/notes', 'views/folders']);
+app.set('views', ['Notes/views', 'Notes/views/users', 'Notes/views/groups', 'Notes/views/notes', 'Notes/views/folders']);
 
 app.use(cookieParser());
-app.use(express.static('static'));
-app.use(express.static('public'));
+app.use(express.static('Notes/static'));
+app.use(express.static('Notes/public'));
 app.use(methodOverrride('_method'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
