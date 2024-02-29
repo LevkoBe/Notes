@@ -8,6 +8,7 @@
   4. [Handlers and static functionality](#handlers-and-static-functionality)
   5. [Sum-up](#sum-up)
   6. [Set-up](#set-up)
+  7. [Video-quick-showcase](#video-quick-showcase)
 
 
 # Introduction
@@ -549,15 +550,14 @@
   ###### Development Workflow
   
   - **Frontend**: The frontend code is located in the `views/` directory, primarily written in Pug (formerly Jade) templates along with CSS stylesheets.
-  - **Backend**: The backend code is located in the `routes/` and `models/` directories, written in Node.js with Express.js for routing and MongoDB for data storage.
-  - **Testing**: Unit tests are located in the `tests/` directory. You can run tests using:
-      
-      ```bash
-      npm test
-      ```
-      
+  - **Backend**: The backend code is located in the `routes/` and `models/` directories, written in Node.js with Express.js for routing and MongoDB for data storage.      
   - **Debugging**: Use `console.log()` statements for debugging backend code. For frontend debugging, use browser developer tools.
   
   ###### Conclusion
   
   You are now ready to develop on Leonotes! Familiarize yourself with the codebase, make changes, and contribute to the project's development. If you encounter any issues, refer to the documentation or seek assistance from the project maintainers. Happy coding!
+
+# Video-quick-showcase
+
+https://github.com/LevkoBe/Notes/assets/118983753/0e7e7b4a-d463-44e1-b893-4f444190046a
+
