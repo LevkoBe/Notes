@@ -508,8 +508,6 @@ Leonotes offers a user-friendly platform for note-taking, group collaboration, a
 
 # Set-up
 
-### Important! For better installation experience, use my repository "Notes-2.0"
-
 ###### Prerequisites
 
 - Node.js installed on your system ([Download Node.js](https://nodejs.org/))
