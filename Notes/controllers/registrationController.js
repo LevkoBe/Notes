@@ -26,7 +26,7 @@ async function createUser(req, res) {
         res.redirect(`/users/${userId}`);
     } catch (error) {
         console.error('Error creating user:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error creating user', status: 500 });
     }
 }
 
@@ -60,7 +60,7 @@ async function loginController(req, res) {
         res.redirect('/');
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error during login', status: 500 });
     }
 }
 

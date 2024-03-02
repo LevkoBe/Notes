@@ -11,7 +11,7 @@ async function renderHomePage(req, res) {
         res.render('home', { groups, notes, user, friends });
     } catch (error) {
         console.error('Error fetching groups and users:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error fetching home components', status: 500 });
     }
 }
 
@@ -29,7 +29,7 @@ async function friendsPage(req, res) {
         res.render('friends', { friends, user });
     } catch (error) {
         console.error('Error fetching groups and users:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Some problems with your friends', status: 500 });
     }
 }
 
@@ -41,7 +41,7 @@ async function renderDashboard(req, res) {
         res.redirect(`users/${userId}/${dashboard._id}`);
     } catch (err) {
         console.error('Error rendering dashboard:', err);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error fetching your dashboard', status: 500 });
     }
 }
 

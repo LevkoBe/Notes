@@ -6,7 +6,7 @@ async function getAllGroups(req, res) {
         res.render('groups-list', { groups });
     } catch (error) {
         console.error('Error fetching groups:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'An error occured trying to fetch your groups', status: 500 });
     }
 }
 
@@ -23,7 +23,7 @@ async function createGroup(req, res) {
         res.redirect(`/groups/${group.id}`);
     } catch (error) {
         console.error('Error creating group:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'An error occured trying to create the group ', status: 500 });
     }
 }
 
@@ -35,7 +35,7 @@ async function getCreateGroupForm(req, res) {
         res.render('create-group', {friends: friends});
     } catch (error) {
         console.error('Error rendering create-group form:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: "Group form could not be displayed.", status: 500 });
     }
 }
 
@@ -63,11 +63,10 @@ async function updateGroup(req, res) {
         res.redirect(`/groups/${groupId}`);
     } catch (error) {
         console.error('Error updating group:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Group might not be updated', status: 500 });
     }
 }
 
-// todo: check if group is updated partially
 async function partialUpdateGroup(req, res) {
     const groupId = req.params.id;
     const updatedFields = req.body;
@@ -76,7 +75,7 @@ async function partialUpdateGroup(req, res) {
         res.redirect(`/groups/${groupId}`);
     } catch (error) {
         console.error('Error updating group:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Group might not be updated', status: 500 });
     }
 }
 
@@ -87,7 +86,7 @@ async function deleteGroup(req, res) {
         res.redirect('/');
     } catch (error) {
         console.error('Error deleting group:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Group might not be deleted', status: 500 });
     }
 }
 

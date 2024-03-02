@@ -8,7 +8,7 @@ async function getAllFolders(req, res) {
         res.render('folders-list', { folders, user });
     } catch (error) {
         console.error('Error fetching folders:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'An error occured fetching your folders', status: 500 });
     }
 }
 
@@ -26,11 +26,10 @@ async function createFolderController(req, res) {
         
         await Folder.findByIdAndUpdate(folderId, { $push: { subfolders: savedFolder._id } });
 
-        // res.status(201).json(savedFolder);
         res.status(201).redirect(`/users/${userId}/${savedFolder.id}`);
     } catch (error) {
         console.error('Error creating Folder:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'IDs of the folder and the user are not recognized by the server' });
     }
 }
 

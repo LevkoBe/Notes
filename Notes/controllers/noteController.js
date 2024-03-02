@@ -9,7 +9,7 @@ async function allUserNotes(req, res) {
         res.render('notes-list', { notes, user });
     } catch (error) {
         console.error('Error fetching notes:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'An error occured while fetching your notes', status: 500 });
     }
 }
 
@@ -20,7 +20,7 @@ async function oneNoteController(req, res) {
         res.render('note', { note });
     } catch (error) {
         console.error('Error fetching Note:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error fetching the note', status: 500 });
     }
 }
 
@@ -49,7 +49,7 @@ async function createNoteController(req, res) {
         res.status(201).redirect(`/users/${userId}/${folderId}`);
     } catch (error) {
         console.error('Error creating Note:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error creating the note', status: 500 });
     }
 }
 
@@ -69,7 +69,7 @@ async function updateNote(req, res) {
         res.status(200).redirect(`/notes/${noteId}`);
     } catch (error) {
         console.error('Error updating Note:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error updating the note', status: 500 });
     }
 }
 

@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const methodOverrride = require('method-override');
 const verifyToken = require('./handlers/verifyToken');
+const loggingMiddleware = require('./handlers/loggingMiddleware');
 
 const prohibitedOrigins = ['http://blocked.com', 'http://anotherblocked.com'];
 
@@ -44,6 +45,7 @@ app.use(cors({
     }
   }
 }));
+app.use(loggingMiddleware);
 
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -70,4 +72,4 @@ app.use('/notes', require('./routes/noteRoutes'));
 app.use('/users', require('./routes/userRoutes'));
 app.use('/folders', require('./routes/folderRoutes'));
 app.use('/groups', require('./routes/groupRoutes'));
-app.use('/*', require('./routes/homeRoutes'));
+app.use('/*', require('./routes/pageNotFoundRoutes'));

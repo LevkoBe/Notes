@@ -8,7 +8,7 @@ async function getAllUsers(req, res) {
         res.render('users-list', { users });
     } catch (error) {
         console.error('Error fetching users:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error fetching users', status: 500 });
     }
 }
 
@@ -40,7 +40,7 @@ async function updateUser(req, res) {
         res.redirect(`/users/${userId}`);
     } catch (error) {
         console.error('Error updating user:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error updating the user', status: 500 });
     }
 }
 
@@ -52,7 +52,7 @@ async function deleteUser(req, res) {
         res.redirect('/logout');
     } catch (error) {
         console.error('Error deleting user:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error deleting the user', status: 500 });
     }
 }
 
@@ -64,7 +64,7 @@ async function getEditUserForm(req, res) {
         res.render('edit-user', { user });
     } catch (error) {
         console.error('Error fetching user for edit:', error);
-        res.status(404).render('error', { message: 'User not found', status: 404 });
+        res.status(404).render('error', { message: 'User to be edited was not found', status: 404 });
     }
 }
 
@@ -93,7 +93,7 @@ async function addFriend(req, res) {
         res.status(200).redirect('/');
     } catch (error) {
         console.error('Error adding friend:', error);
-        res.status(500).render('error', { message: 'Internal Server Error', status: 500 });
+        res.status(500).render('error', { message: 'Error adding friend', status: 500 });
     }
 }
 
