@@ -77,18 +77,17 @@ async function randomNote(req, res) {
     try {
         const userId = req.userId.userId;
         const notes = await Note.find({ owner: userId });
-        const noteTitles = notes.map(note => note.title);
-        
-        const djangoResponse = await axios.post('http://127.0.0.1:8000/random-note', {
-            "note_titles": noteTitles
-        });
-        
-        const randomNote = djangoResponse.data;
+
+        const randomIndex = Math.floor(Math.random() * notes.length);
+        const randomNote = notes[randomIndex];
+
         return res.status(200).send(randomNote);
     } catch (error) {
+        console.error('Error fetching random note:', error);
         return res.status(500).send(error);
     }
 }
+
 
 
 module.exports = {
