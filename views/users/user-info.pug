@@ -33,10 +33,15 @@ block content
 
             #random-note-container
                 h3 Random Note
-                a#random-note-link(href='', target='_blank')
+                p#random-note-click Click for random note
+                a#random-note-link(href='', target='_blank' style='display: none;')
                 p#random-note-content
 
     script.
+        document.getElementById('random-note-click').addEventListener('click', function() {
+            fetchRandomNote();
+        });
+
         function fetchRandomNote() {
             fetch('/notes/random-note', {
                 method: 'GET',
@@ -49,12 +54,11 @@ block content
                 const randomNoteLink = document.getElementById('random-note-link');
                 randomNoteLink.innerText = data.title;
                 randomNoteLink.href = `/notes/${data._id}`;
+                randomNoteLink.style.display = 'inline';
                 document.getElementById('random-note-content').innerText = data.content;
             })
             .catch(error => console.error('Error fetching random note:', error));
         }
-
-        setInterval(fetchRandomNote, 1000);
 
         document.getElementById('copy-id-button').addEventListener('click', function() {
             var userId = '#{user._id}';
