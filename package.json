@@ -2,10 +2,10 @@
   "name": "belevnotes",
   "version": "1.0.0",
   "description": "",
-  "main": "Notes\\app.js",
+  "main": "Notes/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node Notes\\app.js",
+    "start": "node Notes/app.js",
     "start-redis": "redis-server",
     "start-django": "cd NotesMicroservice\\notesmicroservice && python3 manage.py runserver",
     "start-apps": "concurrently \"npm start\" \"npm run start-django\"",
