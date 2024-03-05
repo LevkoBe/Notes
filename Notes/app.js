@@ -16,7 +16,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 const mongoConnection = "mongodb+srv://lbeniakh:6YdKpcWoP56wFCnW@cluster0.tdh5js4.mongodb.net/?retryWrites=true&w=majority";
-const PORT = 3400;
+const PORT = process.env.PORT || 3400;
 
 const start = async () => {
     await mongoose.connect(mongoConnection);
